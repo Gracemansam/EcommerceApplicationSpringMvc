@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <title>Vanilla Store</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous" />
+</head>
+<body>
+<div layout:fragment="content">
+<div class="container-fluid text-center">
+  <div>
+    <img class="img-fluid" th:src="@{/images/LoginImage.png}" />
+  </div>
+  <form th:action="@{/login2}" th:object="${user}" method="post" style="max-width: 350px; margin: 0 auto;">
+
+    <div th:if="${param.error}">
+      <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+    </div>
+
+    <div th:if="${param.logout}">
+      <p class="text-warning">You have been logged out.</p>
+    </div>
+
+    <div class="border border-secondary p-3 rounded">
+      <p>Please Login to place your order</p>
+      <p>
+        <label>
+          <input type="email" th:field="${user.email}"  class="form-control" placeholder="Email" required autofocus/>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input type="password" th:field="${user.password}" class="form-control" placeholder="Password" required />
+        </label>
+      </p>
+      <p>
+        <label>
+          <input type="checkbox" name="remember-me" />
+        </label>&nbsp;Remember Me
+      </p>
+      <a th:href="@{/fill-form}">Create an account</a>
+      <p>
+        <input type="submit" value="Login" class="btn btn-primary" />
+      </p>
+    </div>
+  </form>
+</div>
+</div>
+</body>
+</html>
